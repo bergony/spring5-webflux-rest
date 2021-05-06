@@ -19,9 +19,10 @@ public class Bootstrap implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
-        if(categoryRepository.count().block() == 0){
+        //noinspection ConstantConditions
+        if(0 == categoryRepository.count().block()){
 
             //Load data
             System.out.println("### LOADING DATA ON BOOTSTRAP");
