@@ -40,4 +40,20 @@ public class CategoryController {
         return categoryRepository.save(category);
     }
 
+    @PatchMapping("/api/v1/categories/{id}")
+    Mono<Category> patchCategory(@PathVariable String id, @RequestBody Category category){
+
+        @SuppressWarnings("BlockingMethodInNonBlockingContext")
+        Category foundCategory = categoryRepository.findById(id).block();
+
+        assert foundCategory != null;
+        if (foundCategory.getDescription().equals(category.getDescription())) {
+            return Mono.just(foundCategory);
+        }
+        foundCategory.setDescription(category.getDescription());
+        return categoryRepository.save(foundCategory);
+
+    }
+
+
 }
