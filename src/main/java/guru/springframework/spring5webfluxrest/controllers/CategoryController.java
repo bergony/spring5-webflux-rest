@@ -30,7 +30,7 @@ public class CategoryController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/api/v1/categories")
-    Mono<Void> create(@RequestBody Publisher<Category> categoryPublisher) {
+    Mono<Void> createCategory(@RequestBody Publisher<Category> categoryPublisher) {
         return categoryRepository.saveAll(categoryPublisher).then();
     }
 
