@@ -92,7 +92,7 @@ public class CategoryControllerTest {
     public void testPatchWithChanges() {
 
         given(categoryRepository.findById(anyString()))
-                .willReturn(Mono.just(Category.builder().build()));
+                .willReturn(Mono.just(Category.builder().description("Some").build()));
 
         given(categoryRepository.save(any(Category.class)))
                 .willReturn(Mono.just(Category.builder().build()));
@@ -114,12 +114,12 @@ public class CategoryControllerTest {
     public void testPatchNoChanges() {
 
         given(categoryRepository.findById(anyString()))
-                .willReturn(Mono.just(Category.builder().build()));
+                .willReturn(Mono.just(Category.builder().description("desc").build()));
 
         given(categoryRepository.save(any(Category.class)))
                 .willReturn(Mono.just(Category.builder().build()));
 
-        Mono<Category> catToUpdateMono = Mono.just(Category.builder().build());
+        Mono<Category> catToUpdateMono = Mono.just(Category.builder().description("desc").build());
 
         webTestClient.patch()
                 .uri("/api/v1/categories/asdfasd")
